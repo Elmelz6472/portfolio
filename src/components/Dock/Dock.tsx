@@ -20,13 +20,13 @@ const Dock: React.FC<DockProps> = ({ items }) => {
                     onMouseLeave={() => setHoveredId(null)}
                     onClick={item.onClick}
                     style={{
-                        transform: hoveredId === item.id ? 'scale(1.5)' : 'scale(1)',
+                        transform: hoveredId === item.id ? 'scale(1.35)' : 'scale(1)',
                     }}
                 >
                     <img src={item.icon} alt={item.label} />
                     <div
                         className="dock-item-label"
-                        style={{ display: hoveredId === item.id ? 'block' : 'none' }}
+                        style={{ opacity: hoveredId === item.id ? 1 : 0 }}
                     >
                         {item.label}
                     </div>
