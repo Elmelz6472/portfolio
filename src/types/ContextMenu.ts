@@ -1,10 +1,10 @@
-export interface ContextMenuProps {
-    xPos: string;
-    yPos: string;
-    menuItems: ContextMenueItem[];
+export type ContextMenuProps = {
+    xPos: string
+    yPos: string
+    menuItems: ContextMenueItem[]
 }
 
-export interface ContextMenueItem {
-    name: string,
+export type ContextMenueItem = {
+    name: string
     action: () => void
 }

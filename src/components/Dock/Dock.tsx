@@ -1,21 +1,21 @@
 // src/components/Dock.tsx
-import React, { useState } from 'react';
-import { DockItem } from '../../types/DockItem';
-import './Dock.css';
+import React, { useState } from 'react'
+import { DockItem } from '../../types/DockItem'
+import './Dock.css'
 
 interface DockProps {
-    items: DockItem[];
+    items: DockItem[]
 }
 
 const Dock: React.FC<DockProps> = ({ items }) => {
-    const [hoveredId, setHoveredId] = useState<string | null>(null);
+    const [hoveredId, setHoveredId] = useState<string | null>(null)
 
     return (
-        <div className="dock">
+        <div className='dock'>
             {items.map((item) => (
                 <div
                     key={item.id}
-                    className="dock-item"
+                    className='dock-item'
                     onMouseEnter={() => setHoveredId(item.id)}
                     onMouseLeave={() => setHoveredId(null)}
                     onClick={item.onClick}
@@ -25,7 +25,7 @@ const Dock: React.FC<DockProps> = ({ items }) => {
                 >
                     <img src={item.icon} alt={item.label} />
                     <div
-                        className="dock-item-label"
+                        className='dock-item-label'
                         style={{ opacity: hoveredId === item.id ? 1 : 0 }}
                     >
                         {item.label}
@@ -33,7 +33,7 @@ const Dock: React.FC<DockProps> = ({ items }) => {
                 </div>
             ))}
         </div>
-    );
-};
+    )
+}
 
-export default Dock;
+export default Dock

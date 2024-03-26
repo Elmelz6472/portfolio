@@ -1,6 +1,5 @@
 import { DockItem } from '../../types/DockItem'
 
-
 const dockItems: DockItem[] = [
     {
         id: '1',
@@ -20,4 +19,4 @@ const dockItems: DockItem[] = [
     },
 ]
 
-export default dockItems;
+export default dockItems
