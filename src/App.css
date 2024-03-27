@@ -1,10 +1,10 @@
 /* App.css or the relevant CSS file */
 .App {
+    cursor: default;
     position: relative;
     overflow: hidden;
     min-height: 100vh;
     background-image: url('/background.png');
-    /* Ensure it covers the full viewport height */
 }
 
 .background-image {
@@ -14,7 +14,5 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    /* Cover the container without losing aspect ratio */
     z-index: -1;
-    /* Keep the image behind other content */
 }

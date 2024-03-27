@@ -1,6 +1,6 @@
 // src/components/Dock.tsx
 import React, { useState } from 'react'
-import { DockItem } from '../../types/DockItem'
+import { DockItem } from '../../types/Item'
 import './Dock.css'
 
 interface DockProps {
