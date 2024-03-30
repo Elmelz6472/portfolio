@@ -1,6 +1,5 @@
 import { useEffect, useReducer } from 'react'
 import { appReducer, initialState } from './State/AppState'
-
 import ContextMenu from './components/ContextMenu/ContextMenu'
 import Dock from './components/Dock/Dock'
 import dockItems from './components/Dock/DockItems'
@@ -9,6 +8,7 @@ import desktopItems from './components/Desktop/DesktopItems'
 import Desktop from './components/Desktop/Desktop'
 import './App.css'
 
+import DebugMenu from './Debug/Debug'
 
 
 function App() {
@@ -52,6 +52,7 @@ function App() {
             )}
             <Desktop items={desktopItems} />
             <Dock items={dockItems} />
+            <DebugMenu />
         </div>
     )
 }

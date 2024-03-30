@@ -1,8 +1,11 @@
 // src/components/Desktop.tsx
-import React, { useReducer } from 'react';
+import React, { useCallback, useEffect, useReducer, useRef } from 'react';
 import { appReducer, initialState } from '../../State/AppState';
 import { DesktopItem } from '../../types/Item';
 import './Desktop.css';
+
+import Draggable from 'react-draggable';
+
 
 interface DesktopProps {
     items: DesktopItem[];
@@ -11,6 +14,22 @@ interface DesktopProps {
 const Desktop: React.FC<DesktopProps> = ({ items }) => {
     const [state, dispatch] = useReducer(appReducer, initialState);
 
+    const handleKeyPress = useCallback((event: KeyboardEvent) => {
+        if (event.key === 'enter' || event.key === 'Enter') {
+            alert("hello")
+        }
+    }, []);
+
+
+    useEffect(() => {
+        window.addEventListener('keydown', handleKeyPress);
+        return () => {
+            window.removeEventListener('keydown', handleKeyPress);
+        };
+    }, [handleKeyPress]);
+
+
+
     const handleItemClick = (item: DesktopItem) => {
         const isItemAlreadySelected = state.selectedItem?.some((selected) => selected.id === item.id);
 
@@ -18,8 +37,13 @@ const Desktop: React.FC<DesktopProps> = ({ items }) => {
             dispatch({ type: 'SELECTED_ITEM', item });
         }
 
-        console.log(state.selectedItem);
+        // console.log(state.selectedItem);
     };
+
+
+    useEffect(() => {
+        console.log(state.selectedItem);
+    }, [state.selectedItem]);
 
 
     const handleDesktopClick = (event: React.MouseEvent<HTMLDivElement>) => {
@@ -27,26 +51,26 @@ const Desktop: React.FC<DesktopProps> = ({ items }) => {
         const isDesktopItem = (event.target as HTMLElement).closest('.desktop-item') !== null;
 
         if (isDesktop && !isDesktopItem) {
-            // Dispatch deselection action here
             dispatch({ type: 'DESELECT_ITEMS' });
         }
     };
 
 
+    const nodeRef = useRef(null);
+
     return (
         <div className="desktop" onClick={handleDesktopClick} >
             {items.map((item) => (
-                <div
-                    key={item.id}
-                    className={`desktop-item ${state.selectedItem && state.selectedItem.map(selected => selected.id).includes(item.id) ? 'selected' : ''}`}
-                    onClick={() => handleItemClick(item)}
-                >
-                    <img src={item.icon} alt="" className="desktop-icon" />
-                    <div className="desktop-item-label">{item.name}</div>
-                </div>
+                <Draggable nodeRef={nodeRef} key={item.id}>
+                    <div ref={nodeRef}
+                        className={`desktop-item ${state.selectedItem && state.selectedItem.map(selected => selected.id).includes(item.id) ? 'selected' : ''}`}
+                        onClick={() => handleItemClick(item)}
+                    >
+                        <img src={item.icon} alt="" className="desktop-icon" style={{ pointerEvents: 'none' }} />
+                        <div contentEditable="true" className="desktop-item-label">{item.name}</div>
+                    </div>
+                </Draggable>
             ))}
-
-
         </div>
     );
 };

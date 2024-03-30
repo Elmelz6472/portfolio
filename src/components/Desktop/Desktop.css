@@ -12,19 +12,14 @@
 .desktop-item.selected {
     box-shadow: 0 0 0 2px #454545;
     border-radius: 4px;
-    /* macOS-like blue outline */
 }
 
 
 .desktop-item.selected .desktop-item-label {
     background-color: #007aff;
-    /* Highlight color for text label, matching macOS selection */
     color: white;
-    /* Text color when selected */
     padding: 3px 6px;
-    /* Adjust padding as needed to fit the design */
     border-radius: 4px;
-    /* Rounded corners for the label's background */
 }
 
 .desktop-item.selected::after {
@@ -35,11 +30,8 @@
     right: -4px;
     bottom: -4px;
     border: 2px solid #007aff;
-    /* Highlight color matching macOS selection */
     border-radius: 4px;
-    /* Rounded corners for the selection border */
     pointer-events: none;
-    /* Prevent this pseudo-element from interfering with click events */
 }
 
 .desktop-item {
@@ -56,14 +48,9 @@
 }
 
 .desktop-item-label {
-    /* Ensure there's enough space for the background to appear without affecting the layout */
     box-sizing: border-box;
     max-width: 100%;
-    /* Ensure labels do not overflow their container */
     overflow: hidden;
-    /* Hide overflow */
     text-overflow: ellipsis;
-    /* Add ellipsis for overflow text */
     white-space: nowrap;
-    /* Prevent the label from wrapping */
 }
