@@ -16,9 +16,11 @@ const Desktop: React.FC<DesktopProps> = ({ items }) => {
 
     const handleKeyPress = useCallback((event: KeyboardEvent) => {
         if (event.key === 'enter' || event.key === 'Enter') {
-            alert("hello")
+            if (state.selectedItem) {
+                alert(JSON.stringify(state.selectedItem))
+            }
         }
-    }, []);
+    }, [state]);
 
 
     useEffect(() => {
@@ -67,7 +69,7 @@ const Desktop: React.FC<DesktopProps> = ({ items }) => {
                         onClick={() => handleItemClick(item)}
                     >
                         <img src={item.icon} alt="" className="desktop-icon" style={{ pointerEvents: 'none' }} />
-                        <div contentEditable="true" className="desktop-item-label">{item.name}</div>
+                        <div suppressContentEditableWarning={true} contentEditable="true" className="desktop-item-label">{item.name}</div>
                     </div>
                 </Draggable>
             ))}

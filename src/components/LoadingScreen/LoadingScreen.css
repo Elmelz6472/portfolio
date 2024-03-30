@@ -1,0 +1,72 @@
+/* LoadingScreen.css */
+
+.loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #f8f9fa;
+    /* Light background color */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    /* Ensure it's above other elements */
+    animation: fadeIn 0.5s ease-in-out forwards;
+    /* Fade-in animation */
+}
+
+.loading-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.loading-text {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    /* Dark gray text color */
+    margin-bottom: 20px;
+}
+
+.loading-bar {
+    width: 300px;
+    height: 20px;
+    background-color: #ddd;
+    /* Light gray background for the loading bar */
+    border-radius: 10px;
+    overflow: hidden;
+    /* Hide overflow to clip the progress */
+}
+
+.loading-progress {
+    width: 0;
+    /* Initial width of the progress bar */
+    height: 100%;
+    background-color: #007bff;
+    /* Blue color for the progress bar */
+    border-radius: 10px;
+    transition: width 0.5s ease-in-out;
+    /* Smooth width transition */
+}
+
+.loading-percent {
+    font-size: 18px;
+    color: #007bff;
+    /* Blue color for the percentage text */
+    margin-top: 10px;
+}
+
+/* Animation for fade-in effect */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
