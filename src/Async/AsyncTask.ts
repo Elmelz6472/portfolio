@@ -4,9 +4,9 @@ import { DesktopItem } from '../types/Item'
 import { readFile } from './Reader'
 import { writeFile } from './Writer'
 
-export const readDesktopItems = (): DesktopItem[] | null => {
+export const readDesktopItems = (key: string): DesktopItem[] | null => {
     try {
-        const desktopItems = readFile('DesktopItems')
+        const desktopItems = readFile(`DesktopItems/${key}`)
         return desktopItems
     } catch (error) {
         console.error('Error reading desktop items:', error)
@@ -29,7 +29,6 @@ export async function fetchData(): Promise<unknown> {
     return new Promise((resolve) => {
         setTimeout(() => {
             resolve('Data fetched successfully')
-            console.log('Data fetched successfully')
         }, 2000) // Simulate 2 seconds delay
     })
 }

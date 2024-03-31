@@ -7,16 +7,29 @@ import Dock from './components/Dock/Dock'
 import Desktop from './components/Desktop/Desktop'
 import LoadingScreen from './components/LoadingScreen/LoadingScreen'
 import AsyncTaskManager from './Async/AsyncTaskManager'
-import { fetchData } from './Async/AsyncTask'
+import { fetchData, writeDesktopItem } from './Async/AsyncTask'
 import './App.css'
 import DebugMenu from './Debug/Debug'
 import { readDesktopItems } from './Async/AsyncTask'
-import { DesktopItem } from './types/Item'
+import desktopItems from './components/Desktop/DesktopItems'
+
+
 
 function App() {
     const [state, dispatch] = useReducer(appReducer, initialState)
     const [showLoading, setShowLoading] = useState(true)
     const [progress, setProgress] = useState(0)
+
+
+    useEffect(() => {
+        desktopItems.forEach((desktopItem) => {
+            writeDesktopItem(desktopItem.name, desktopItem);
+            dispatch({ type: 'ADD_ITEM', item: desktopItem });
+        });
+
+        console.log(state.renderedApps)
+    }, [state.renderedApps]);
+
 
     // Fetch async data
     useEffect(() => {
@@ -25,7 +38,7 @@ function App() {
                 const taskManager = new AsyncTaskManager()
                 taskManager.addTask(fetchData, 'TestFetchData')
                 taskManager.addTask(async () => {
-                    const desktopItems = readDesktopItems()
+                    const desktopItems = readDesktopItems("untitled folder")
                     return desktopItems
                 }, 'ReadDesktopItemsTask')
 
@@ -33,10 +46,8 @@ function App() {
                 taskManager
                     .executeTasks()
                     .then((results) => {
-                        // const desktopItemsResult = results['ReadDesktopItemsTask'] // Access result of readDesktopItems task
-                        state.selectedItem = results['ReadDesktopItemsTask'] as DesktopItem[]
-                        console.log('Desktop Items Result:', state.selectedItem)
-                        setShowLoading(false) // Hide loading screen after tasks are executed
+                        // state.selectedItem = results['ReadDesktopItemsTask'] as DesktopItem[]
+                        setShowLoading(false)
                     })
                     .catch((error) => {
                         console.error('Error executing tasks:', error)
@@ -98,10 +109,10 @@ function App() {
                         <ContextMenu
                             xPos={state.contextMenu.xPos}
                             yPos={state.contextMenu.yPos}
-                            menuItems={state.selectedItem ? AppMenuItems : menuItems}
+                            menuItems={menuItems}
                         />
                     )}
-                    <Desktop items={state.selectedItem || null} />
+                    <Desktop items={state.renderedApps} />
                     <Dock items={dockItems} />
                     <DebugMenu />
                 </>

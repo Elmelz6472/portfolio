@@ -10,7 +10,7 @@ const desktopItems: DesktopItem[] = [
         },
     },
     {
-        id: '2',
+        id: '8',
         name: 'untitled folder',
         icon: '/folder.png',
         onClick: () => {

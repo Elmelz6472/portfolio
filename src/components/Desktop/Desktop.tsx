@@ -39,13 +39,7 @@ const Desktop: React.FC<DesktopProps> = ({ items }) => {
         if (!isItemAlreadySelected) {
             dispatch({ type: 'SELECTED_ITEM', item })
         }
-
-        // console.log(state.selectedItem);
     }
-
-    useEffect(() => {
-        console.log(state.selectedItem)
-    }, [state.selectedItem])
 
     const handleDesktopClick = (event: React.MouseEvent<HTMLDivElement>) => {
         const isDesktop = (event.target as HTMLElement).classList.contains('desktop')
@@ -73,7 +67,7 @@ const Desktop: React.FC<DesktopProps> = ({ items }) => {
 
     return (
         <div className='desktop' onClick={handleDesktopClick}>
-            {items?.map((item) => (
+            {Array.isArray(items) && items.map((item) => (
                 <Draggable nodeRef={nodeRef} key={item.id}>
                     <div
                         ref={nodeRef}
@@ -98,6 +92,8 @@ const Desktop: React.FC<DesktopProps> = ({ items }) => {
                     </div>
                 </Draggable>
             ))}
+
+
         </div>
     )
 }
