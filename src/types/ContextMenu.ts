@@ -5,8 +5,7 @@ export type ContextMenuProps = {
 }
 
 export type ContextMenueItem = {
-    type: 'item' | 'separator';
+    type: 'item' | 'separator'
     name?: string
-    action?: (() => void) | (() => JSX.Element);
+    action?: (() => void) | (() => JSX.Element)
 }
-
