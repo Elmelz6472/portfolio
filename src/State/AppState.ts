@@ -24,7 +24,7 @@ export type AppAction =
     | { type: 'SHOW_WALLPAPER_MENU'; xPos: string; yPos: string }
     | { type: 'HIDE_WALLPAPER_MENU' }
     | { type: 'UPDATE_ITEM_NAME'; item: DesktopItem; name: string }
-    | { type: 'ADD_ITEM'; item: DesktopItem}
+    | { type: 'ADD_ITEM'; item: DesktopItem }
 
 export const initialState: AppState = {
     contextMenu: {
@@ -38,7 +38,7 @@ export const initialState: AppState = {
         yPos: '0px',
     },
     selectedItem: [],
-    renderedApps: []
+    renderedApps: [],
 }
 
 export const appReducer = (state: AppState, action: AppAction): AppState => {
@@ -86,21 +86,18 @@ export const appReducer = (state: AppState, action: AppAction): AppState => {
                     : state.selectedItem,
             }
 
-       case 'ADD_ITEM':
+        case 'ADD_ITEM':
             // eslint-disable-next-line no-case-declarations
-            const itemExists = state.renderedApps?.some((item) => item.id === action.item.id);
-            console.log("ADDED ITEM ", itemExists)
+            const itemExists = state.renderedApps?.some((item) => item.id === action.item.id)
+            console.log('ADDED ITEM ', itemExists)
             if (!itemExists) {
-                console.log(
-                    {...state,
-                    renderedApps: [...state.renderedApps , action.item]
-                })
+                console.log({ ...state, renderedApps: [...state.renderedApps, action.item] })
                 return {
                     ...state,
-                    renderedApps: [...state.renderedApps , action.item]
-                };
+                    renderedApps: [...state.renderedApps, action.item],
+                }
             }
-            return state;
+            return state
 
         default:
             return state

@@ -13,23 +13,19 @@ import DebugMenu from './Debug/Debug'
 import { readDesktopItems } from './Async/AsyncTask'
 import desktopItems from './components/Desktop/DesktopItems'
 
-
-
 function App() {
     const [state, dispatch] = useReducer(appReducer, initialState)
     const [showLoading, setShowLoading] = useState(true)
     const [progress, setProgress] = useState(0)
 
-
     useEffect(() => {
         desktopItems.forEach((desktopItem) => {
-            writeDesktopItem(desktopItem.name, desktopItem);
-            dispatch({ type: 'ADD_ITEM', item: desktopItem });
-        });
+            writeDesktopItem(desktopItem.name, desktopItem)
+            dispatch({ type: 'ADD_ITEM', item: desktopItem })
+        })
 
         console.log(state.renderedApps)
-    }, [state.renderedApps]);
-
+    }, [state.renderedApps])
 
     // Fetch async data
     useEffect(() => {
@@ -38,7 +34,7 @@ function App() {
                 const taskManager = new AsyncTaskManager()
                 taskManager.addTask(fetchData, 'TestFetchData')
                 taskManager.addTask(async () => {
-                    const desktopItems = readDesktopItems("untitled folder")
+                    const desktopItems = readDesktopItems('untitled folder')
                     return desktopItems
                 }, 'ReadDesktopItemsTask')
 

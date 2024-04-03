@@ -61,39 +61,38 @@ const Desktop: React.FC<DesktopProps> = ({ items }) => {
         dispatch({ type: 'UPDATE_ITEM_NAME', item: item, name: labelValue })
         console.log('sent update')
     }
-    const handleOnBlur = () => { }
+    const handleOnBlur = () => {}
 
     const nodeRef = useRef(null)
 
     return (
         <div className='desktop' onClick={handleDesktopClick}>
-            {Array.isArray(items) && items.map((item) => (
-                <Draggable nodeRef={nodeRef} key={item.id}>
-                    <div
-                        ref={nodeRef}
-                        className={`desktop-item ${state.selectedItem && state.selectedItem.map((selected) => selected.id).includes(item.id) ? 'selected' : ''}`}
-                        onClick={() => handleItemClick(item)}
-                    >
-                        <img
-                            src={item.icon}
-                            alt=''
-                            className='desktop-icon'
-                            style={{ pointerEvents: 'none' }}
-                        />
+            {Array.isArray(items) &&
+                items.map((item) => (
+                    <Draggable nodeRef={nodeRef} key={item.id}>
                         <div
-                            onBlur={handleOnBlur}
-                            onInput={(event) => handleInputChange(event, item)}
-                            suppressContentEditableWarning={true}
-                            contentEditable='true'
-                            className='desktop-item-label'
+                            ref={nodeRef}
+                            className={`desktop-item ${state.selectedItem && state.selectedItem.map((selected) => selected.id).includes(item.id) ? 'selected' : ''}`}
+                            onClick={() => handleItemClick(item)}
                         >
-                            {item.name}
+                            <img
+                                src={item.icon}
+                                alt=''
+                                className='desktop-icon'
+                                style={{ pointerEvents: 'none' }}
+                            />
+                            <div
+                                onBlur={handleOnBlur}
+                                onInput={(event) => handleInputChange(event, item)}
+                                suppressContentEditableWarning={true}
+                                contentEditable='true'
+                                className='desktop-item-label'
+                            >
+                                {item.name}
+                            </div>
                         </div>
-                    </div>
-                </Draggable>
-            ))}
-
-
+                    </Draggable>
+                ))}
         </div>
     )
 }

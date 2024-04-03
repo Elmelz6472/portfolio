@@ -15,20 +15,23 @@ const ContextMenu: React.FC<ContextMenuProps> = ({ xPos, yPos, menuItems }) => {
                 }
 
                 return (
-                    <li key={`item-${index}`} onClick={() => {
-                        if (item.name !== 'New Folder') item.action
-                        else {
-                            const Item = {
-                                id: '-1',
-                                name: 'new folder from context',
-                                icon: '/folder.png',
-                                onClick: () => { }
+                    <li
+                        key={`item-${index}`}
+                        onClick={() => {
+                            if (item.name !== 'New Folder') item.action
+                            else {
+                                const Item = {
+                                    id: '-1',
+                                    name: 'new folder from context',
+                                    icon: '/folder.png',
+                                    onClick: () => {},
+                                }
+                                writeDesktopItem('untitled folder from context', Item)
+                                dispatch({ type: 'ADD_ITEM', item: Item })
+                                console.log('added from dispatch')
                             }
-                            writeDesktopItem('untitled folder from context', Item)
-                            dispatch({ type: 'ADD_ITEM', item: Item })
-                            console.log("added from dispatch")
-                        }
-                    }}>
+                        }}
+                    >
                         {item.name}
                     </li>
                 )
@@ -38,4 +41,3 @@ const ContextMenu: React.FC<ContextMenuProps> = ({ xPos, yPos, menuItems }) => {
 }
 
 export default ContextMenu
-
